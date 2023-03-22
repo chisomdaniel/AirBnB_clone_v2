@@ -153,7 +153,8 @@ class HBNBCommand(cmd.Cmd):
                             continue
 
                     new_dict[key] = new_value
-                new_instance.__dict__.update(new_dict)
+                for key, value in new_dict:
+                    setattr(self, key, value)
             except Exception as e:
                 pass
             storage.save()
