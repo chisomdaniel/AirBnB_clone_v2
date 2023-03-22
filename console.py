@@ -153,7 +153,7 @@ class HBNBCommand(cmd.Cmd):
                             continue
 
                     new_dict[key] = new_value
-                for key, value in new_dict:
+                for key, value in new_dict.items():
                     setattr(self, key, value)
             except Exception as e:
                 pass
