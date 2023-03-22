@@ -17,19 +17,16 @@ class State(BaseModel, Base):
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
 
-    if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-        cities = relationship("City", order_by=City.id, back_populates="state")
-    elif os.getenv('HBNB_TYPE_STORAGE') == 'file':
-        @property
-        def cities(self):
-            city_list = []
-            for key, value in storage.__objects.items():
-                if value.__name__ == 'City':
-                    if self.id == value.state_id:
-                        city_list.append(value)
+    #if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+    cities = relationship("City", order_by=City.id, back_populates="state")
+    #elif os.getenv('HBNB_TYPE_STORAGE') == 'file':
+    @property
+    def cities(self):
+        city_list = []
+        for key, value in storage.__objects.items():
+            if value.__name__ == 'City':
+                if self.id == value.state_id:
+                    city_list.append(value)
 
-            return city_list
-
-
-City.state = relationship("State", back_populates="cities")
+        return city_list
 
