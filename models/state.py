@@ -32,4 +32,3 @@ class State(BaseModel, Base):
 
 
 City.state = relationship("State", back_populates="cities")
-
