@@ -17,7 +17,7 @@ from models.amenity import Amenity
 user = os.getenv('HBNB_MYSQL_USER', default='hbnb_dev')
 password = os.getenv('HBNB_MYSQL_PWD')
 host = os.getenv('HBNB_MYSQL_HOST', default='localhost')
-database = os.getenv('HBNB_MYSQL_DB', defaulf='hbnb_dev_db')
+database = os.getenv('HBNB_MYSQL_DB', default='hbnb_dev_db')
 
 
 class DBStorage:
@@ -56,6 +56,8 @@ class DBStorage:
         new_dict = {}
         for obj in objs:
             new_dict["{}.{}".format(type(obj).__name__, obj.id)] = obj
+        
+        return new_dict
 
     def new(self, obj):
         """Add obj to the current database session."""

@@ -154,7 +154,7 @@ class HBNBCommand(cmd.Cmd):
 
                     new_dict[key] = new_value
                 for key, value in new_dict.items():
-                    setattr(self, key, value)
+                    setattr(new_instance, key, value)
             except Exception as e:
                 pass
         storage.new(new_instance)
@@ -240,11 +240,11 @@ class HBNBCommand(cmd.Cmd):
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(args).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all().items():
                 print_list.append(str(v))
 
         print(print_list)

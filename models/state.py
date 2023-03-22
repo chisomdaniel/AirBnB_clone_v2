@@ -6,7 +6,6 @@ from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy import ForeignKey
 import os
 from models.city import City
-from models import storage
 from sqlalchemy.orm import relationship
 
 
@@ -22,6 +21,9 @@ class State(BaseModel, Base):
     #elif os.getenv('HBNB_TYPE_STORAGE') == 'file':
     @property
     def cities(self):
+        '''to define the relationship for cities'''
+        from models import storage
+
         city_list = []
         for key, value in storage.__objects.items():
             if value.__name__ == 'City':
