@@ -5,7 +5,7 @@
 # shellcheck disable=SC2230
 
 # check if nginx has been installed and install it
-check=$(which nginx | grep '/usr/bin/nginx')
+check=$(which nginx)
 if [ -z "$check" ]; then
 	# update and upgrade the shell
 	apt update -y && sudo apt upgrade -y
@@ -41,7 +41,7 @@ chown -R ubuntu:ubuntu /data/
 
 check2=$(grep 'location /hbnb_static/' /etc/nginx/sites-available/default)
 if [ -z "$check2" ]; then
-	string="server_name _;\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\ttry_files \$uri \$uri/ =404;\n}\n"
+	string="server_name _;\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\ttry_files \$uri \$uri/ =404;\n\t}\n"
 	sed -i "s|server_name _;|$string|" /etc/nginx/sites-available/default
 fi
 
