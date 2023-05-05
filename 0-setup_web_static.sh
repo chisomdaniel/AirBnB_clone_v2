@@ -4,6 +4,7 @@
 # shellcheck disable=SC2154
 # shellcheck disable=SC2230
 
+# check if nginx has been installed and install it
 check=$(which nginx | grep '/usr/bin/nginx')
 if [ -z "$check" ]; then
 	# update and upgrade the shell
@@ -11,11 +12,10 @@ if [ -z "$check" ]; then
 	
 	# install nginx
 	apt install nginx -y
+	
+	# adjust the fire wall
+	ufw allow 'Nginx HTTP'
 fi
-
-
-# adjust the fire wall
-ufw allow 'Nginx HTTP'
 
 # create the files if they don't exist
 if [ ! -d "/data/web_static/releases/test/" ]; then
@@ -41,7 +41,7 @@ chown -R ubuntu:ubuntu /data/
 
 check2=$(grep 'location /hbnb_static/' /etc/nginx/sites-available/default)
 if [ -z "$check2" ]; then
-	string="server_name _;\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\ttry_files $uri $uri/ =404;\n}\n"
+	string="server_name _;\n\tlocation /hbnb_static/ {\n\t\talias /data/web_static/current/;\n\t\ttry_files \$uri \$uri/ =404;\n}\n"
 	sed -i "s|server_name _;|$string|" /etc/nginx/sites-available/default
 fi
 
