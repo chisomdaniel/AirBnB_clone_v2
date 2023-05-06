@@ -6,6 +6,7 @@ import os
 
 
 def do_pack():
+    '''Generates a .tgz archive file'''
     dt = datetime.now()
     timestamp = f"{dt.year}{dt.month}{dt.day}{dt.hour}{dt.minute}{dt.second}"
 
