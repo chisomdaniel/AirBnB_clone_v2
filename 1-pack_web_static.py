@@ -6,7 +6,10 @@ import os
 
 
 def do_pack():
-    ''' Generates a .tgz archive file '''
+    """Generates a .tgz archive file
+
+    Return: the archive path
+    """
 
     dt = datetime.now()
     timestamp = f"{dt.year}{dt.month}{dt.day}{dt.hour}{dt.minute}{dt.second}"
