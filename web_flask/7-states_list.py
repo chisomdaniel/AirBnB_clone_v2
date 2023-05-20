@@ -15,7 +15,7 @@ def states_list():
     new = {}
     for i in states:
         new[i.name] = i.id
-    names = sorted(list(new.keys()))
+    names = list(new.keys())
     return (render_template('7-states_list.html', state_dict=new, names=names))
 
 
