@@ -25,10 +25,10 @@ class State(BaseModel, Base):
         from models import storage
 
         city_list = []
-        for key, value in storage.__objects.items():
-            if value.__name__ == 'City':
-                if self.id == value.state_id:
-                    city_list.append(value)
+        for key, value in storage.all(City).items():
+            #if value.__name__ == 'City':
+            if self.id == value.state_id:
+                city_list.append(value)
 
         return city_list
 

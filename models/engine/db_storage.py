@@ -49,9 +49,15 @@ class DBStorage:
             objs.extend(self.__session.query(Amenity).all())
         else:
             classes = {"State": State, "City": City, "User": User, "Place": Place, "Review": Review, "Amenity": Amenity}
+
             if cls not in classes.keys():
-                return
-            objs = self.__session.query(classes[cls])
+                if cls not in classes.values():
+                    return
+
+            if type(cls).__name__ == 'str':
+                objs = self__session.query(classes[cls])
+            else:
+                objs = self.__session.query(cls)
 
         new_dict = {}
         for obj in objs:
@@ -79,4 +85,8 @@ class DBStorage:
                                        expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
+
+    def close(self):
+        '''close the session'''
+        self.__session.close()
 

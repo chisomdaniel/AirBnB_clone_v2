@@ -18,10 +18,10 @@ def hbnb():
     return ('HBNB')
 
 
-@app.route('/c/<TEXT>', strict_slashes=False)
-def c_is_fun(TEXT):
+@app.route('/c/<text>', strict_slashes=False)
+def c_is_fun(text):
     '''C is fun'''
-    text = TEXT.replace('_', ' ')
+    text = text.replace('_', ' ')
     return (f"C {text}")
 
 
