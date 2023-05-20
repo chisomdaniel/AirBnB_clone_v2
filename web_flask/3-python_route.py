@@ -22,7 +22,8 @@ def hbnb():
 def c_is_fun(text):
     '''C is fun'''
     text = text.replace('_', ' ')
-    return (f"C {text}")
+    out = f"C {text}"
+    return (out)
 
 
 @app.route('/python/', strict_slashes=False)
@@ -30,7 +31,9 @@ def c_is_fun(text):
 def python_is_cool(text='is cool'):
     '''Python is cool'''
     text = text.replace('_', ' ')
-    return (f"Python {text}")
+
+    out = f"Python {text}"
+    return (out)
 
 
 if __name__ == "__main__":
