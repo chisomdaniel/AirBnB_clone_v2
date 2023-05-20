@@ -16,9 +16,10 @@ class State(BaseModel, Base):
     __tablename__ = "states"
     name = Column(String(128), nullable=False)
 
-    #if os.getenv('HBNB_TYPE_STORAGE') == 'db':
+    # if os.getenv('HBNB_TYPE_STORAGE') == 'db':
     cities = relationship("City", order_by=City.id, back_populates="state")
-    #elif os.getenv('HBNB_TYPE_STORAGE') == 'file':
+    # elif os.getenv('HBNB_TYPE_STORAGE') == 'file':
+
     @property
     def cities(self):
         '''to define the relationship for cities'''
@@ -26,9 +27,8 @@ class State(BaseModel, Base):
 
         city_list = []
         for key, value in storage.all(City).items():
-            #if value.__name__ == 'City':
+            # if value.__name__ == 'City':
             if self.id == value.state_id:
                 city_list.append(value)
 
         return city_list
-

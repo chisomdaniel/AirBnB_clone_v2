@@ -33,14 +33,14 @@ class DBStorage:
 
         if os.getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
-    
+
     def all(self, cls=None):
         '''query on the current database session (self.__session)
         all objects depending of the class name (argument cls)
         if cls=None, query all types of objects (User, State, City,
         Amenity, Place and Review)'''
 
-        if cls == None:
+        if cls is None:
             objs = self.__session.query(State).all()
             objs.extend(self.__session.query(City).all())
             objs.extend(self.__session.query(User).all())
@@ -48,36 +48,38 @@ class DBStorage:
             objs.extend(self.__session.query(Review).all())
             objs.extend(self.__session.query(Amenity).all())
         else:
-            classes = {"State": State, "City": City, "User": User, "Place": Place, "Review": Review, "Amenity": Amenity}
+            classes = {"State": State, "City": City,
+                       "User": User, "Place": Place,
+                       "Review": Review, "Amenity": Amenity}
 
             if cls not in classes.keys():
                 if cls not in classes.values():
                     return
 
             if type(cls).__name__ == 'str':
-                objs = self__session.query(classes[cls])
+                objs = self.__session.query(classes[cls])
             else:
                 objs = self.__session.query(cls)
 
         new_dict = {}
         for obj in objs:
             new_dict["{}.{}".format(type(obj).__name__, obj.id)] = obj
-        
+
         return new_dict
 
     def new(self, obj):
         """Add obj to the current database session."""
         self.__session.add(obj)
-    
+
     def save(self):
         """Commit all changes to the current database session."""
         self.__session.commit()
-    
+
     def delete(self, obj=None):
         """Delete obj from the current database session."""
         if obj is not None:
             self.__session.delete(obj)
-    
+
     def reload(self):
         """Create all tables in the database and initialize a new session."""
         Base.metadata.create_all(self.__engine)
@@ -89,4 +91,3 @@ class DBStorage:
     def close(self):
         '''close the session'''
         self.__session.close()
-
