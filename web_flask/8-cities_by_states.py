@@ -3,9 +3,11 @@
 from flask import Flask
 from flask import render_template
 from models import storage
+import os
 
 
-app = Flask(__name__)
+app = Flaisk(__name__)
+
 states = storage.all('State').values()
 
 
@@ -24,7 +26,8 @@ def states_list():
         all_city.update({i.name: cities})
 
     names = list(new.keys())
-    return (render_template('8-cities_by_states.html', state_dict=new, names=names, cities=all_city))
+    return (render_template('8-cities_by_states.html', state_dict=new,
+                            names=names, cities=all_city))
 
 
 @app.teardown_appcontext
