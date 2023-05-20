@@ -22,7 +22,7 @@ def hbnb():
 def c_is_fun(text):
     '''C is fun'''
     text = text.replace('_', ' ')
-    out = f"C {text}"
+    out = "C {text}".format(text)
     return (out)
 
 
@@ -32,7 +32,7 @@ def python_is_cool(text='is cool'):
     '''Python is cool'''
     text = text.replace('_', ' ')
 
-    out = f"Python {text}"
+    out = "Python {}".format(text)
     return (out)
 
 
