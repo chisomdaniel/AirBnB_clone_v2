@@ -6,7 +6,7 @@ from models import storage
 import os
 
 
-app = Flaisk(__name__)
+app = Flask(__name__)
 
 states = storage.all('State').values()
 
