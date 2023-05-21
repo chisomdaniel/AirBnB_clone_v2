@@ -7,12 +7,13 @@
         <H1>States</H1>
         <UL>
 	{% for state in names|sort %}
-		<LI>{{ state_dict[state] }}: <B>{{ state }}</B></LI>
-		<UL>
-		{% for city, id in cities[state]|dictsort %}
-			<LI>{{ id }}: <B>{{ city }}</B></LI>
-		{% endfor %}
-		</UL>
+		<LI>{{ state_dict[state] }}: <B>{{ state }}</B>
+			<UL>
+			{% for city, id in cities[state]|dictsort %}
+				<LI>{{ id }}: <B>{{ city }}</B></LI>
+			{% endfor %}
+			</UL>
+		</LI>
 	{% endfor %}
         </UL>
     </BODY>
